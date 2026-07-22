@@ -21,7 +21,7 @@
             <a href="#photos" class="text-dark text-decoration-none">Photos</a>
             <a href="#reviews" class="text-dark text-decoration-none">Reviews</a>
         </nav>
-        <button type="button" class="btn btn-outline-dark ms-auto">Book a room</button>
+        <a href="{% url 'book_a_room' %}" class="btn btn-outline-dark ms-auto">Book a room</a>
     </header>
 
     <main>
@@ -42,19 +42,24 @@
                     <p>
                         We are perfectly situated in the vibrant heart of the city, offering our guests effortless access to historic landmarks, cultural centers, and premier dining, all while being framed by the breathtaking, snow-capped peaks of the Tien Shan mountains. Every square meter of our property is designed with your ultimate peace in mind, featuring elegantly appointed rooms, high-speed connectivity, and tranquil wellness spaces. We believe that true hospitality lies in the details, which is why our dedicated team works around the clock to provide deeply personalized care.
                     </p>
+                    <i  id="mountains-end-marker"></i>
                 </div>
+            </div>
+        </div>
 
+
+            <div class="content text-dark">
                 <div class="container text-center mt-5" id="photos">
-                    <h2 class="text-light"><i class="bi bi-camera"></i>Photos</h2>
-
-                    <div id="carouselExampleCaptions" class="carousel slide hotel-carousel">
-                        <div class="carousel-indicators">
-                            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
-                            <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="3" aria-label="Slide 4"></button>
-                        </div>
-                        <div class="carousel-inner">
+                    <h2><i class="bi bi-camera"></i> Photos</h2>
+                    <div class="row g-4 align-items-center">
+                        <div id="carouselExampleCaptions" class="carousel slide hotel-carousel col-12 col-lg-7">
+                            <div class="carousel-indicators">
+                                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                                <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="3" aria-label="Slide 4"></button>
+                            </div>
+                            <div class="carousel-inner">
                             <div class="carousel-item active">
                                 <img src="{% static 'images/1.jpg' %}" class="d-block w-100" alt="1">
                                 <div class="carousel-caption d-none d-md-block">
@@ -83,26 +88,47 @@
                                     <p>Our reception area</p>
                                 </div>
                             </div>
+                            </div>
+                            <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Previous</span>
+                            </button>
+                            <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Next</span>
+                            </button>
                         </div>
-                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
-                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                            <span class="visually-hidden">Previous</span>
-                        </button>
-                        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
-                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                            <span class="visually-hidden">Next</span>
-                        </button>
+                        <div class="py-3 col-12 col-lg-5 text-start">
+                            <p class="mt-4">
+                                Nestled in one of Almaty's most picturesque locations, Best Hotel offers
+                            breathtaking views of the majestic Tian Shan mountains and the vibrant city
+                            skyline. Every morning begins with fresh mountain air and unforgettable
+                                scenery, creating the perfect atmosphere for relaxation, inspiration, and
+                                unforgettable memories.
+                            </p>
+                            <p>
+                                Our convenient location allows guests to reach Almaty's most popular
+                                attractions, shopping centers, restaurants, business districts, and cultural
+                                landmarks within minutes. Whether you're planning a business trip, a family
+                                vacation, or a romantic getaway, everything you need is always close by.
+                            </p>
+                            <p>
+                                Explore scenic parks, hiking trails, ski resorts, and local cafés before
+                                returning to the comfort of spacious rooms designed for rest and tranquility.
+                                After a day of adventure or meetings, unwind while enjoying panoramic views
+                                and the warm hospitality that has welcomed travelers since 1991.
+                            </p>
+                        </div>
                     </div>
                 </div>
-                
-                <hr class="my-5" style="border:none">
 
-                <div id="reviews" class="container text-center py-5 text-light">
+                <hr class="my-5" style="border:none" >
+
+                <div id="reviews" class="container text-center py-5">
                     <h2 class="mb-5"><i class="bi bi-star-fill" style="color:#facc15;"></i> Reviews</h2>
-
                     <div class="row g-4">
                         <div class="col-md-4">
-                            <div class="p-4 h-100 border rounded-3 shadow-sm">
+                            <div class="p-4 h-100 border rounded-3 shadow-sm zoom-hover">
                                 <div class="mb-3">
                                     <i class="bi bi-star-fill text-warning"></i>
                                     <i class="bi bi-star-fill text-warning"></i>
@@ -114,12 +140,11 @@
                                     "The staff went above and beyond to make our stay memorable. The rooms were spotless and the view of the mountains was breathtaking."
                                 </p>
                                 <h6 class="mt-4 mb-0 fw-bold">Aigerim T.</h6>
-                                <small class="text-light">Almaty, Kazakhstan</small>
+                                <small>Almaty, Kazakhstan</small>
                             </div>
                         </div>
-                    
                         <div class="col-md-4">
-                            <div class="p-4 h-100 border rounded-3 shadow-sm">
+                            <div class="p-4 h-100 border rounded-3 shadow-sm zoom-hover">
                                 <div class="mb-3">
                                     <i class="bi bi-star-fill text-warning"></i>
                                     <i class="bi bi-star-fill text-warning"></i>
@@ -131,12 +156,11 @@
                                     "A perfect blend of comfort and elegance. We'll definitely be coming back on our next business trip to Almaty."
                                 </p>
                                 <h6 class="mt-4 mb-0 fw-bold">James R.</h6>
-                                <small class="text-light">London, UK</small>
+                                <small>London, UK</small>
                             </div>
                         </div>
-                    
                         <div class="col-md-4">
-                            <div class="p-4 h-100 border rounded-3 shadow-sm">
+                            <div class="p-4 h-100 border rounded-3 shadow-sm zoom-hover">
                                 <div class="mb-3">
                                     <i class="bi bi-star-fill text-warning"></i>
                                     <i class="bi bi-star-fill text-warning"></i>
@@ -148,16 +172,90 @@
                                     "From check-in to check-out, everything was seamless. Best Hotel truly lives up to its name."
                                 </p>
                                 <h6 class="mt-4 mb-0 fw-bold">Elena K.</h6>
-                                <small class="text-light">Astana, Kazakhstan</small>
+                                <small>Astana, Kazakhstan</small>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
     </main>
+    <footer class="text-light pt-5 pb-4" style="background-color: #1a1a1a;">
+        <div class="container">
+            <div class="row gy-4">
+                <div class="col-md-4">
+                    <h5 class="fw-bold mb-3">Best Hotel</h5>
+                    <p class="text-secondary">
+                        Since 1991, offering timeless hospitality in the heart of Almaty,
+                        framed by the breathtaking Tien Shan mountains.
+                    </p>
+                    <div class="d-flex gap-3 mt-3">
+                        <a href="#" class="text-light fs-5"><i class="bi bi-instagram"></i></a>
+                        <a href="#" class="text-light fs-5"><i class="bi bi-facebook"></i></a>
+                        <a href="#" class="text-light fs-5"><i class="bi bi-whatsapp"></i></a>
+                    </div>
+                </div>
+ 
+                <div class="col-md-2">
+                    <h6 class="fw-bold mb-3">Navigate</h6>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="#home" class="text-secondary text-decoration-none">Home</a></li>
+                        <li class="mb-2"><a href="#about" class="text-secondary text-decoration-none">About</a></li>
+                        <li class="mb-2"><a href="#photos" class="text-secondary text-decoration-none">Photos</a></li>
+                        <li class="mb-2"><a href="#reviews" class="text-secondary text-decoration-none">Reviews</a></li>
+                    </ul>
+                </div>
+ 
+                <div class="col-md-3">
+                    <h6 class="fw-bold mb-3">Contact</h6>
+                    <ul class="list-unstyled text-secondary">
+                        <li class="mb-2"><i class="bi bi-geo-alt me-2"></i>123 Al-Farabi Ave, Almaty</li>
+                        <li class="mb-2"><i class="bi bi-telephone me-2"></i>+7 (700) 123-45-67</li>
+                        <li class="mb-2"><i class="bi bi-envelope me-2"></i>info@besthotel.kz</li>
+                    </ul>
+                </div>
+ 
+                <div class="col-md-3">
+                    <h6 class="fw-bold mb-3">Ready to stay?</h6>
+                    <p class="text-secondary small">Book your room today and experience true Almaty hospitality.</p>
+                    <a href="{% url 'book_a_room' %}" class="btn btn-warning fw-bold w-100 text-decoration-none">
+                        <i class="bi bi-calendar-check me-2"></i>Book a room
+                    </a>
 
+                </div>
+            </div>
+ 
+            <hr class="my-4" style="border-color: #444;">
+ 
+            <div class="d-flex flex-column flex-md-row justify-content-between align-items-center text-secondary small">
+                <p class="mb-2 mb-md-0">&copy; 2026 Best Hotel. All rights reserved.</p>
+                <div class="d-flex gap-3">
+                    <a href="#" class="text-secondary text-decoration-none">Privacy Policy</a>
+                    <a href="#" class="text-secondary text-decoration-none">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
     <script src="{% static 'js/script.js' %}"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const marker = document.querySelector('#mountains-end-marker');
+            if (!marker) return;
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    // Маркер выше верха экрана (ушёл вверх) -> мы за горами -> светлый режим
+                    // Маркер ниже верха экрана (ещё не дошли) -> мы в горах -> тёмный режим
+                    if (entry.boundingClientRect.top < 0) {
+                        document.body.classList.add('scrolled-past-mountains');
+                    } else {
+                        document.body.classList.remove('scrolled-past-mountains');
+                    }
+                });
+            }, { threshold: 0 });
+
+            observer.observe(marker);
+        });
+    </script>
 </body>
 </html>

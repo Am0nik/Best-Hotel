@@ -1,13 +1,27 @@
+.zoom-hover {
+    transition: transform 0.4s ease-in-out;
+}
+
+.zoom-hover:hover {
+    transform: scale(1.05);
+}
 #home {
     padding-top: 4rem;
     padding-bottom: 35rem;
 }
 
+body {
+    background-color: #ffffff;
+    color: #212529;
+    transition: background-color 0.4s ease-in-out, color 0.4s ease-in-out;
+}
+
 .mountains-section {
     position: relative;
-    background-color: #3B3B3B;
+    background-color: #3B3B3B !important;
     padding-top: 0px;
     padding-bottom: 4rem;
+    transition: background-color 0.5s ease-in-out;
 }
 
 .mountains-section .mountains-img {
@@ -17,6 +31,8 @@
     width: 100%;
     z-index: 1;
     pointer-events: none;
+    opacity: 1;
+    transition: opacity 1s ease-in-out;
 }
 
 .mountains-section .content {
@@ -29,7 +45,7 @@
     margin-left: auto;
     margin-right: auto;
     line-height: 1.8;
-    color: #e5e5e5;
+    color: #e5e5e5 !important;
 }
 
 #about h2,
@@ -42,7 +58,6 @@
     margin-right: 0.5rem;
 }
 
-/* ===== CAROUSEL ===== */
 .hotel-carousel {
     max-width: 700px;
     margin: 0 auto;
@@ -54,4 +69,21 @@
 .hotel-carousel img {
     height: 400px;
     object-fit: cover;
+}
+
+/* ===== Светлый режим (после гор) ===== */
+body.scrolled-past-mountains .mountains-section {
+    background-color: #ffffff !important;
+}
+
+body.scrolled-past-mountains .mountains-section .mountains-img {
+    opacity: 0 !important;
+}
+
+body.scrolled-past-mountains #about h2 {
+    color: #212529 !important;
+}
+
+body.scrolled-past-mountains #about p {
+    color: #212529 !important;
 }

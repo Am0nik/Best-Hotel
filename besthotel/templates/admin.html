@@ -1,0 +1,117 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+    <title>Admin Panel</title>
+</head>
+<body>
+    <div class="container my-5">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2>Admin Panel — Bookings</h2>
+            <div class="d-flex gap-2">
+                <a href="{% url 'admin_logout' %}" class="btn btn-outline-danger btn-sm">Log Out</a>
+                <a href="{% url 'index' %}" class="btn btn-outline-secondary btn-sm">Home</a>
+            </div>
+        </div>
+
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    {{ message }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            {% endfor %}
+        {% endif %}
+
+        <div class="table-responsive shadow-sm rounded border">
+            <table class="table table-hover align-middle mb-0 bg-white">
+                <thead class="table-light">
+                    <tr>
+                        <th>ID</th>
+                        <th>Guest</th>
+                        <th>Contacts</th>
+                        <th>Room Details</th>
+                        <th>Stay Dates</th>
+                        <th>Current Status</th>
+                        <th class="text-end">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for booking in bookings %}
+                    <tr>
+                        <td><strong>#{{ booking.id }}</strong></td>
+                        <td>
+                            <div class="fw-bold">{{ booking.guest_name }}</div>
+                            <small class="text-muted">Created: {{ booking.created_at|date:"d.m.Y H:i" }}</small>
+                        </td>
+                        <td>
+                            <div><i class="bi bi-envelope me-1"></i>{{ booking.guest_email }}</div>
+                            <div><i class="bi bi-telephone me-1"></i>{{ booking.guest_phone }}</div>
+                        </td>
+                        <td>
+                            <span class="badge bg-secondary">{{ booking.get_room_type_display }}</span>
+                            <div class="small text-muted mt-1">Guests: {{ booking.guests_count }}</div>
+                        </td>
+                        <td>
+                            <div class="small"><strong>Check-in:</strong> {{ booking.check_in|date:"d.m.Y" }}</div>
+                            <div class="small"><strong>Check-out:</strong> {{ booking.check_out|date:"d.m.Y" }}</div>
+                        </td>
+                        <td>
+                            {% if booking.status == 'PENDING' %}
+                                <span class="badge bg-warning text-dark">Pending</span>
+                            {% elif booking.status == 'CONFIRMED' %}
+                                <span class="badge bg-success">Confirmed</span>
+                            {% else %}
+                                <span class="badge bg-danger">Cancelled</span>
+                            {% endif %}
+                        </td>
+                        <td class="text-end">
+                            <form method="POST" class="d-inline-flex gap-1">
+                                {% csrf_token %}
+                                <input type="hidden" name="booking_id" value="{{ booking.id }}">
+
+                                {% if booking.status != 'CONFIRMED' %}
+                                <button type="submit" name="status" value="CONFIRMED" class="btn btn-sm btn-success" title="Confirm">
+                                    <i class="bi bi-check-lg"></i>
+                                </button>
+                                {% endif %}
+
+                                {% if booking.status != 'CANCELLED' %}
+                                <button type="submit" name="status" value="CANCELLED" class="btn btn-sm btn-danger" title="Cancel">
+                                    <i class="bi bi-x-lg"></i>
+                                </button>
+                                {% endif %}
+
+                                {% if booking.status != 'PENDING' %}
+                                <button type="submit" name="status" value="PENDING" class="btn btn-sm btn-outline-warning text-dark" title="Set to Pending">
+                                    <i class="bi bi-clock-history"></i>
+                                </button>
+                                {% endif %}
+                            </form>
+                        </td>
+                    </tr>
+                    {% if booking.special_requests %}
+                    <tr class="table-light">
+                        <td colspan="7" class="small text-muted py-1">
+                            <strong>Special Requests:</strong> {{ booking.special_requests }}
+                        </td>
+                    </tr>
+                    {% endif %}
+                    {% empty %}
+                    <tr>
+                        <td colspan="7" class="text-center py-4 text-muted">No booking requests found.</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+<script src="{% static 'js/script.js' %}"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+</body>
+</html>
